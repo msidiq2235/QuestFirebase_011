@@ -1,4 +1,14 @@
-<img width="1920" height="1080" alt="Screenshot 2026-01-02 220136" src="https://github.com/user-attachments/assets/5fd12f1b-cc19-4066-8a74-6d328b04bf97" />
-<img width="1920" height="1080" alt="Screenshot 2026-01-02 221049" src="https://github.com/user-attachments/assets/d765eebf-682f-4b67-95d1-994e2bb66282" />
-<img width="1920" height="1080" alt="Screenshot 2026-01-02 220154" src="https://github.com/user-attachments/assets/b48a2a76-0232-44a5-8f4e-a0bc4bc7e3d6" />
-<img width="1919" height="1020" alt="image" src="https://github.com/user-attachments/assets/fb550a58-62b8-4f04-bf38-be1046192e98" />
+Halaman Tambah Siswa
+<img width="1920" height="1080" alt="Screenshot 2026-01-09 233110" src="https://github.com/user-attachments/assets/4c74a380-bce9-428b-8288-077906b0ba99" />
+
+Halaman Home
+<img width="1920" height="1080" alt="Screenshot 2026-01-09 233122" src="https://github.com/user-attachments/assets/e442ff77-898e-4e4d-96ba-30168cb13d53" />
+
+Halaman Detail Siswa
+<img width="1920" height="1080" alt="Screenshot 2026-01-09 233440" src="https://github.com/user-attachments/assets/c3eefaad-8b61-4dad-9f6f-5c7e830250a4" />
+
+Halaman Edit Siswa
+<img width="1920" height="1080" alt="Screenshot 2026-01-09 234022" src="https://github.com/user-attachments/assets/5146a770-e01e-4973-a38e-419fb8d04d84" />
+
+Halaman Database Firebase
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/029fa396-93cf-47c9-ae2e-08688f589737" />
