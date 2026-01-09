@@ -14,7 +14,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.Call
+import androidx.compose.material.icons.filled.Phone
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -45,7 +45,7 @@ import com.example.pt14firebase.viewmodel.StatusUiSiswa
 @Composable
 fun HomeScreen(
     navigateToItemEntry: () -> Unit,
-    navigateToItemUpdate: (Int) -> Unit,
+    navigateToItemUpdate: (String) -> Unit,
     modifier: Modifier = Modifier,
     viewModel: HomeViewModel = viewModel(factory = PenyediaViewModel.Factory)
 ) {
@@ -63,13 +63,9 @@ fun HomeScreen(
         floatingActionButton = {
             FloatingActionButton(
                 onClick = navigateToItemEntry,
-                shape = MaterialTheme.shapes.medium,
                 modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_large))
             ) {
-                Icon(
-                    imageVector = Icons.Default.Add,
-                    contentDescription = stringResource(R.string.entry_siswa)
-                )
+                Icon(Icons.Default.Add, contentDescription = null)
             }
         }
     ) { innerPadding ->
@@ -77,7 +73,7 @@ fun HomeScreen(
             statusUiSiswa = viewModel.statusUiSiswa,
             onSiswaClick = navigateToItemUpdate,
             retryAction = viewModel::loadSiswa,
-            modifier = modifier
+            modifier = Modifier
                 .padding(innerPadding)
                 .fillMaxSize()
         )
@@ -87,7 +83,7 @@ fun HomeScreen(
 @Composable
 fun HomeBody(
     statusUiSiswa: StatusUiSiswa,
-    onSiswaClick: (Int) -> Unit,
+    onSiswaClick: (String) -> Unit,
     retryAction: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -97,19 +93,17 @@ fun HomeBody(
     ) {
         when (statusUiSiswa) {
             is StatusUiSiswa.Loading -> LoadingScreen()
-            is StatusUiSiswa.Success ->
-                DaftarSiswa(
-                    itemsSiswa = statusUiSiswa.siswa,
-                    onSiswaClick = { onSiswaClick(it.id.toInt()) }
-                )
-            is StatusUiSiswa.Error ->
-                ErrorScreen(
-                    retryAction,
-                    modifier = modifier.fillMaxSize()
-                )
+            is StatusUiSiswa.Success -> DataSiswa(
+                itemSiswa = statusUiSiswa.siswa,
+                onSiswaClick = { siswa ->
+                    onSiswaClick(siswa.id)
+                }
+            )
+            is StatusUiSiswa.Error -> ErrorScreen(retryAction)
         }
     }
 }
+
 
 @Composable
 fun LoadingScreen(modifier: Modifier = Modifier) {
@@ -121,10 +115,7 @@ fun LoadingScreen(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun ErrorScreen(
-    retryAction: () -> Unit,
-    modifier: Modifier = Modifier
-) {
+fun ErrorScreen(retryAction: () -> Unit, modifier: Modifier = Modifier) {
     Column(
         modifier = modifier,
         verticalArrangement = Arrangement.Center,
@@ -141,13 +132,13 @@ fun ErrorScreen(
 }
 
 @Composable
-fun DaftarSiswa(
-    itemsSiswa: List<Siswa>,
+fun DataSiswa(
+    itemSiswa: List<Siswa>,
     onSiswaClick: (Siswa) -> Unit,
     modifier: Modifier = Modifier
 ) {
     LazyColumn(modifier = modifier) {
-        items(itemsSiswa, key = { it.id }) { person ->
+        items(items = itemSiswa, key = { it.id }) { person ->
             ItemSiswa(
                 siswa = person,
                 modifier = Modifier
@@ -178,18 +169,18 @@ fun ItemSiswa(
             ) {
                 Text(
                     text = siswa.nama,
-                    style = MaterialTheme.typography.titleLarge
+                    style = MaterialTheme.typography.titleLarge,
                 )
                 Spacer(Modifier.weight(1f))
                 Icon(
-                    imageVector = Icons.Default.Call,
+                    imageVector = Icons.Default.Phone,
                     contentDescription = null
                 )
-                Text(
-                    text = siswa.telpon,
-                    style = MaterialTheme.typography.titleMedium
-                )
             }
+            Text(
+                text = siswa.telpon,
+                style = MaterialTheme.typography.titleMedium
+            )
             Text(
                 text = siswa.alamat,
                 style = MaterialTheme.typography.titleMedium
